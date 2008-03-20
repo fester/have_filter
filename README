@@ -1,0 +1,19 @@
+== HaveFilter matcher
+
+HaveFilter matcher is a custom matcher for rspec suite. It's purpose is a testing of ActionController filters presense.
+If you want to test presence of filters today, you have to do something like
+
+@controller.before_filters.should include(:filter_name)
+
+As for me, it just looks ugly. No, really.
+I've spent some time thinking about it and made this filter. Sample usage could be found in spec/rails/matchers/have_filter_spec.rb
+I'll post some here:
+
+    @controller.should have_filter(:before_filter_method)
+    @controller.should have_filter(:before_filter_method).before(:any_action)
+    @controller.should have_filter(:after_some_actions_filter).after([:action_1, :action_2])
+
+== Thanks
+
+I would like to say 'thank you' to Yurii Rashkovskii (http://rashkovskii.com) and Michael Klishin (http://novemberain.com). Without them I would never get even a half of Ruby/Rails experience that I have now.
+Also, thanks goes to my lovely wife and my family. They keep me turning.
