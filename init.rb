@@ -1,1 +1,2 @@
-require 'spec/rails/matchers/have_filter'
+require 'have_filter'
+ActionController::Filters::Filter.send( :include, Spec::Rails::Filter ) 
