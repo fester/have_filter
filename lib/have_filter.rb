@@ -1,5 +1,17 @@
 module Spec
   module Rails
+    
+    module Filter
+      def self.included(base)
+        base.send( :include, InstanceMethods )
+      end
+      module InstanceMethods
+        def runnable_callback?(action)
+          should_run_callback?( Struct.new(:action_name).new(action) )
+        end
+      end
+    end
+
     module Matchers
       class HaveFilter
         def initialize(filter_name)
@@ -10,13 +22,13 @@ module Spec
 
         def matches?(target)
           @target = target.class
-          filter = @target.find_filter(@filter_name) { |filter| filter.type == @filter_type }
+          filter = @target.filter_chain.find(@filter_name) { |filter| filter.type == @filter_type }
 
           if @actions == :any_action
             filter
           else
             @actions = stringify(@actions)
-            filter and !@actions.find { |action| @target.filter_excluded_from_action?(filter, action) }
+            filter and @actions.find { |action| filter.runnable_callback?(action) }
           end
         end
 
@@ -72,3 +84,4 @@ module Spec
     end
   end
 end
+

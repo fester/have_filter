@@ -1,0 +1,8 @@
+Sat Aug 23 12:26:14 SGT 2008 (TAG: fix_compatibility_issues_with_rails_2_1_0)
+
+  * Fixed compatibiity issues with rails-2.1.0
+
+  * Revised directory structure to conform to the one recommended by rspec-plugin-generator 
+    (see http://github.com/pat-maddox/rspec-plugin-generator)
+
+# __END__

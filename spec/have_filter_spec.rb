@@ -1,6 +1,6 @@
-require File.dirname(__FILE__) + '/../../spec_helper'
-require 'action_controller'
-require 'spec/rails/matchers/have_filter'
+# require File.dirname(__FILE__) + '/../../spec_helper'
+require File.dirname(__FILE__) + '/spec_helper'
+
 
 class DummyApplicationController < ActionController::Base
   before_filter :before_filter_method
@@ -17,6 +17,7 @@ class DummyApplicationController < ActionController::Base
   
   before_filter :before_some_actions_filter, :only => [:method_1, :method_2]
 end
+
 
 describe "Default filter lookup settings" do
   include Spec::Rails::Matchers
@@ -43,6 +44,7 @@ describe "Default filter lookup settings" do
   end
 end
 
+
 describe "Lookup for filter with specified type" do
   include Spec::Rails::Matchers  
   before(:each) { @controller = DummyApplicationController.new }
@@ -59,6 +61,7 @@ describe "Lookup for filter with specified type" do
     @controller.should have_filter(:after_filter_method).after(:any_action)
   end
 end
+
 
 describe "Lookup for filter restricted with :only" do
   include Spec::Rails::Matchers
@@ -88,6 +91,7 @@ describe "Lookup for filter restricted with :only" do
   end
 end
 
+
 describe "Lookup for filter restricted with :except" do
   include Spec::Rails::Matchers
   before(:each) {@controller = DummyApplicationController.new}
@@ -116,6 +120,7 @@ describe "Lookup for filter restricted with :except" do
   end
 end
 
+
 describe "Filter lookup with array of actions specified" do
   include Spec::Rails::Matchers
   before(:each){ @controller = DummyApplicationController.new }
@@ -127,6 +132,7 @@ describe "Filter lookup with array of actions specified" do
     @controller.should_not have_filter(:before_some_actions_filter).before(:show)
   end  
 end
+
 
 describe "matcher variations" do
   include Spec::Rails::Matchers
